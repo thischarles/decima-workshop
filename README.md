@@ -1,4 +1,4 @@
-[![Download](https://img.shields.io/github/v/release/ShadelessFox/decima?label=Download&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KCTxwYXRoIGZpbGw9IndoaXRlIiBkPSJNMTEuMiAwYS44LjggMCAwIDAtLjguOHYxMS40TDcuMjYgOS40NGEuODAzLjgwMyAwIDAgMC0xLjEzLjA3NGwtMS4wNSAxLjJhLjguOCAwIDAgMCAuMDczIDEuMTNsNi4zMyA1LjU0YS43OTUuNzk1IDAgMCAwIDEuMDUgMGw2LjMyLTUuNTRhLjguOCAwIDAgMCAuMDc0LTEuMTNsLTEuMDUtMS4yYS44MDQuODA0IDAgMCAwLTEuMTMtLjA3NGwtMy4xNCAyLjc2Vi44YS44LjggMCAwIDAtLjgtLjh6bS04IDIwLjhhLjguOCAwIDAgMC0uOC44djEuNmEuOC44IDAgMCAwIC44LjhoMTcuNmEuOC44IDAgMCAwIC44LS44di0xLjZhLjguOCAwIDAgMC0uOC0uOHoiPjwvcGF0aD4KPC9zdmc+Cg==)](https://github.com/ShadelessFox/decima/releases/latest)
+[![Download](https://img.shields.io/github/v/release/ShadelessFox/decima-workshop?label=Download&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KCTxwYXRoIGZpbGw9IndoaXRlIiBkPSJNMTEuMiAwYS44LjggMCAwIDAtLjguOHYxMS40TDcuMjYgOS40NGEuODAzLjgwMyAwIDAgMC0xLjEzLjA3NGwtMS4wNSAxLjJhLjguOCAwIDAgMCAuMDczIDEuMTNsNi4zMyA1LjU0YS43OTUuNzk1IDAgMCAwIDEuMDUgMGw2LjMyLTUuNTRhLjguOCAwIDAgMCAuMDc0LTEuMTNsLTEuMDUtMS4yYS44MDQuODA0IDAgMCAwLTEuMTMtLjA3NGwtMy4xNCAyLjc2Vi44YS44LjggMCAwIDAtLjgtLjh6bS04IDIwLjhhLjguOCAwIDAgMC0uOC44djEuNmEuOC44IDAgMCAwIC44LjhoMTcuNmEuOC44IDAgMCAwIC44LS44di0xLjZhLjguOCAwIDAgMC0uOC0uOHoiPjwvcGF0aD4KPC9zdmc+Cg==)](https://github.com/ShadelessFox/decima-workshop/releases/latest)
 [![Discord](https://img.shields.io/discord/1012475585605414983?label=Chat&logo=discord&logoColor=white)](https://discord.gg/Gt4gkMwadB)
 [![Support](https://img.shields.io/badge/Support-Ko--fi-blue?logo=kofi&logoColor=white)](https://ko-fi.com/shadelessfox)
 
@@ -15,13 +15,13 @@ Decima Workshop is an open-source modding tool for [games](#supported-games) pow
 
 ### Running
 
-1. Download the latest release from the [releases page](https://github.com/ShadelessFox/decima/releases/latest) for your operating system
+1. Download the latest release from the [releases page](https://github.com/ShadelessFox/decima-workshop/releases/latest) for your operating system
 2. Unzip the downloaded archive and launch using `decima.exe` on Windows or `bin/decima` on Linux
-3. For further steps, [check out the wiki](https://github.com/ShadelessFox/decima/wiki/Getting-started)
+3. For further steps, [check out the wiki](https://github.com/ShadelessFox/decima-workshop/wiki/Getting-started)
 
 #### Nightly builds
 
-If you want to try the latest features and improvements, you can download the latest build from the [actions page](https://github.com/ShadelessFox/decima/actions).
+If you want to try the latest features and improvements, you can download the latest build from the [actions page](https://github.com/ShadelessFox/decima-workshop/actions).
 Click on the latest workflow run and download the artifact from the `Artifacts` section for your operating system.
 
 ### Building
@@ -30,7 +30,7 @@ Open your favorite terminal app and execute the following commands in the specif
 1. Make sure you have **Java 24** installed. We recommend using [Adoptium](https://adoptium.net/temurin/releases/?arch=x64&version=17&package=jdk)
 2. Make sure you have **Git** installed
 3. Open the terminal and execute the following commands:
-   1. `git clone https://github.com/ShadelessFox/decima`
+   1. `git clone https://github.com/ShadelessFox/decima-workshop`
    2. `cd decima`
    3. `./mvnw clean package`
 

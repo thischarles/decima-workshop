@@ -101,7 +101,7 @@ public class ModelExportDialog extends BaseDialog {
     protected void buttonPressed(@NotNull ButtonDescriptor descriptor) {
         if (descriptor == BUTTON_HELP) {
             try {
-                Desktop.getDesktop().browse(URI.create("https://github.com/ShadelessFox/decima/wiki/Model-export"));
+                Desktop.getDesktop().browse(URI.create("https://github.com/ShadelessFox/decima-workshop/wiki/Model-export"));
             } catch (IOException e) {
                 UIUtils.showErrorDialog(e, "Unable to open wiki page");
             }

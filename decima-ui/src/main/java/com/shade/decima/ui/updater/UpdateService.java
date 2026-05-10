@@ -53,7 +53,7 @@ public class UpdateService implements PersistableComponent<UpdateService.Setting
     private static final Logger log = getLogger(UpdateService.class);
     private static final HttpClient client = HttpClient.newHttpClient();
 
-    private static final String REPOSITORY_NAME = "ShadelessFox/decima";
+    private static final String REPOSITORY_NAME = "ShadelessFox/decima-workshop";
     private static final long CHECK_PERIOD = Duration.ofDays(1).toMinutes();
 
     private Settings settings = new Settings();

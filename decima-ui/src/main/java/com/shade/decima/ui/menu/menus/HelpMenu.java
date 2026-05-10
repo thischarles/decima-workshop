@@ -24,7 +24,7 @@ public final class HelpMenu extends Menu {
         @Override
         public void perform(@NotNull MenuItemContext ctx) {
             try {
-                Desktop.getDesktop().browse(URI.create("https://github.com/ShadelessFox/decima/wiki"));
+                Desktop.getDesktop().browse(URI.create("https://github.com/ShadelessFox/decima-workshop/wiki"));
             } catch (IOException e) {
                 UIUtils.showErrorDialog(e, "Unable to open wiki page");
             }
@@ -46,12 +46,12 @@ public final class HelpMenu extends Menu {
             A tool for viewing and editing data in games powered by Decima engine.
             <br><br>
             <table>
-            <tr><td><b>Version:</b></td><td>{1} (Built on {2,date,short}), commit: <a href="https://github.com/ShadelessFox/decima/commit/{3}">{3}</a></tr>
+            <tr><td><b>Version:</b></td><td>{1} (Built on {2,date,short}), commit: <a href="https://github.com/ShadelessFox/decima-workshop/commit/{3}">{3}</a></tr>
             <tr><td><b>VM Version:</b></td><td>{4}; {5} ({6} {7})</td></tr>
             <tr><td><b>VM Vendor:</b></td><td>{8}, <a href="{9}">{9}</a></td></tr>
             </table>
             <br>
-            See <a href="https://github.com/ShadelessFox/decima">https://github.com/ShadelessFox/decima</a> for more information.
+            See <a href="https://github.com/ShadelessFox/decima-workshop">https://github.com/ShadelessFox/decima-workshop</a> for more information.
             """);
 
         @Override
