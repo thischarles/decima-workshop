@@ -17,6 +17,26 @@
 
     <profiles>
         <profile>
+            <id>launcher-macos</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.panteleyev</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>1.6.5</version>
+                        <configuration>
+                            <appVersion>1.0.27</appVersion>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>launcher-windows</id>
             <activation>
                 <os>

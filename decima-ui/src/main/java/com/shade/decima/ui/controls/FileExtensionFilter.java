@@ -60,6 +60,11 @@ public final class FileExtensionFilter extends FileFilter {
         final String fileName = file.getName();
         final String fileExtension = IOUtils.getFullExtension(fileName);
 
+        // "*" matches any file (e.g. the extensionless macOS game binary).
+        if (extension.equals("*")) {
+            return true;
+        }
+
         return !fileExtension.isEmpty() && pattern.matcher(fileExtension).matches();
     }
 

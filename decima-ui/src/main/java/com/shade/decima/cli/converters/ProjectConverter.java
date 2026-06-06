@@ -32,6 +32,12 @@ public class ProjectConverter implements ITypeConverter<Project> {
             root -> GameType.HZD,
             root -> root.resolve("Packed_DX12"),
             root -> root.resolve("oo2core_3_win64.dll")
+        ),
+        new GamePredicate(
+            List.of("DeathStranding"), // Mac (only DSDC was released on macOS)
+            root -> GameType.DSDC,
+            root -> root.resolve("data"),
+            root -> root.resolve("liboo2coremac64.dylib")
         )
     );
 
