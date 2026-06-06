@@ -35,7 +35,13 @@ public class ProgressDialog extends BaseDialog {
         this.taskPanel.setLayout(new BoxLayout(taskPanel, BoxLayout.PAGE_AXIS));
 
         if (Taskbar.isTaskbarSupported()) {
-            taskbar = Taskbar.getTaskbar();
+            final Taskbar tb = Taskbar.getTaskbar();
+            if (tb.isSupported(Taskbar.Feature.PROGRESS_STATE_WINDOW)
+                && tb.isSupported(Taskbar.Feature.PROGRESS_VALUE_WINDOW)) {
+                taskbar = tb;
+            } else {
+                taskbar = null;
+            }
         } else {
             taskbar = null;
         }

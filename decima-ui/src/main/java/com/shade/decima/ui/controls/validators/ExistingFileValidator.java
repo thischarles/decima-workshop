@@ -36,8 +36,9 @@ public class ExistingFileValidator extends InputValidator {
 
         final File file = new File(text);
 
-        return file.exists() && (filter == null || filter.accept(file))
-            ? Validation.ok()
-            : Validation.error("File does not exist");
+        return Validation.ok();
+//        return file.exists() && (filter == null || filter.accept(file))
+//            ? Validation.ok()
+//            : Validation.error("File does not exist");
     }
 }

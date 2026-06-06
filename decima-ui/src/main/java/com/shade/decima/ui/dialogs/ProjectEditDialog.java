@@ -122,7 +122,7 @@ public class ProjectEditDialog extends BaseEditDialog {
         panel.add(new LabeledSeparator("Game"), "span,wrap");
 
         {
-            final FileExtensionFilter filter = new FileExtensionFilter("Game Executable", "exe");
+            final FileExtensionFilter filter = new FileExtensionFilter("Game Executable", "*");
 
             final JLabel label = new JLabel("Executable file:");
             label.setToolTipText("<html>Path to the game's binary executable.<br>For most games, it's the only <kbd>.exe</kbd> file located in the game's root folder.</html>");

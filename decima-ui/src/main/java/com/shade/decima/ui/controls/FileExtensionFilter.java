@@ -48,11 +48,12 @@ public class FileExtensionFilter extends FileFilter {
         final String fileName = file.getName();
         final String fileExtension = IOUtils.getFullExtension(fileName);
 
-        if (!fileExtension.isEmpty()) {
-            for (String extension : extensions) {
-                if (extension.equalsIgnoreCase(fileExtension)) {
-                    return true;
-                }
+        for (String extension : extensions) {
+            if (extension.equals("*")) {
+                return true;
+            }
+            if (!fileExtension.isEmpty() && extension.equalsIgnoreCase(fileExtension)) {
+                return true;
             }
         }
 
