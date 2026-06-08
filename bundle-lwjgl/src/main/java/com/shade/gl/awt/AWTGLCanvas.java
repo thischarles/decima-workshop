@@ -17,6 +17,7 @@ public abstract class AWTGLCanvas extends Canvas {
         return switch (Platform.get()) {
             case WINDOWS -> new PlatformWin32GLCanvas();
             case LINUX -> new PlatformLinuxGLCanvas();
+            case MACOSX -> new PlatformMacOSXGLCanvas();
             default -> throw new UnsupportedOperationException("Platform " + Platform.get() + " not yet supported");
         };
     }

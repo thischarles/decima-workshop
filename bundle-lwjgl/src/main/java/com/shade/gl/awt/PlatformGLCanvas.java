@@ -7,7 +7,7 @@ import java.awt.*;
  *
  * @author Kai Burjack
  */
-sealed interface PlatformGLCanvas permits PlatformLinuxGLCanvas, PlatformWin32GLCanvas {
+sealed interface PlatformGLCanvas permits PlatformLinuxGLCanvas, PlatformWin32GLCanvas, PlatformMacOSXGLCanvas {
     long create(Canvas canvas, GLData data, GLData effective) throws AWTException;
 
     boolean makeCurrent(long context);

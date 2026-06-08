@@ -97,13 +97,16 @@ public class ModelViewport extends AWTGLCanvas implements Disposable {
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
 
-        glEnable(GL_DEBUG_OUTPUT);
-        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+        // KHR_debug (GL 4.3) isn't available on macOS (OpenGL is capped at 4.1 there), so skip it.
+        if (GL.getCapabilities().OpenGL43) {
+            glEnable(GL_DEBUG_OUTPUT);
+            glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 
-        glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, true);
-        glDebugMessageControl(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_PUSH_GROUP, GL_DONT_CARE, 0, false);
-        glDebugMessageControl(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_POP_GROUP, GL_DONT_CARE, 0, false);
-        glDebugMessageCallback(new DebugCallback(), 0);
+            glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, true);
+            glDebugMessageControl(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_PUSH_GROUP, GL_DONT_CARE, 0, false);
+            glDebugMessageControl(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_POP_GROUP, GL_DONT_CARE, 0, false);
+            glDebugMessageCallback(new DebugCallback(), 0);
+        }
 
         try {
             outlineRenderer.setup();
@@ -171,10 +174,12 @@ public class ModelViewport extends AWTGLCanvas implements Disposable {
         modelRenderer.dispose();
         debugRenderer.dispose();
 
-        glDisable(GL_DEBUG_OUTPUT);
-        glDisable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-        glDebugMessageCallback(null, 0);
-        glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, false);
+        if (GL.getCapabilities().OpenGL43) {
+            glDisable(GL_DEBUG_OUTPUT);
+            glDisable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+            glDebugMessageCallback(null, 0);
+            glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, false);
+        }
     }
 
     @Override
