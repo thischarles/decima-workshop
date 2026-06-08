@@ -54,6 +54,12 @@ public class DSPackfileProvider implements PackfileProvider {
 
                 if (info != null) {
                     packfiles.add(new PackfileInfo(path, info.name, info.language));
+                } else {
+                    // Mount archives the category lookup doesn't recognize too. On the macOS
+                    // Director's Cut build a number of .bin archives aren't matched by the hash
+                    // lookup; they hold streamed .core.stream data (e.g. high-res textures), so
+                    // mounting them makes those assets visible and viewable in the explorer.
+                    packfiles.add(new PackfileInfo(path, IOUtils.getBasename(path), null));
                 }
             }
         }
