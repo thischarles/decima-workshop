@@ -1,6 +1,7 @@
 package com.shade.gl;
 
 import com.shade.util.NotNull;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL43;
 
 /**
@@ -17,11 +18,15 @@ import org.lwjgl.opengl.GL43;
  */
 public record DebugGroup(@NotNull String name) implements AutoCloseable {
     public DebugGroup {
-        GL43.glPushDebugGroup(GL43.GL_DEBUG_SOURCE_APPLICATION, 0, name);
+        if (GL.getCapabilities().OpenGL43) {
+            GL43.glPushDebugGroup(GL43.GL_DEBUG_SOURCE_APPLICATION, 0, name);
+        }
     }
 
     @Override
     public void close() {
-        GL43.glPopDebugGroup();
+        if (GL.getCapabilities().OpenGL43) {
+            GL43.glPopDebugGroup();
+        }
     }
 }
