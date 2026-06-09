@@ -1,6 +1,7 @@
 package com.shade.decima.model.viewer;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.util.SystemInfo;
 import com.shade.decima.model.rtti.objects.RTTIObject;
 import com.shade.decima.model.viewer.scene.Node;
 import com.shade.decima.model.viewer.scene.SceneSerializer;
@@ -36,6 +37,7 @@ public class ModelViewerPanel extends JComponent implements Disposable, Property
     private JToolBar topToolbar;
     private JToolBar bottomToolbar;
     private ModelViewport viewport;
+    private OffscreenModelSurface surface;
     private RenderLoop loop;
 
     private ValueController<RTTIObject> controller;
@@ -72,34 +74,46 @@ public class ModelViewerPanel extends JComponent implements Disposable, Property
             final JPanel canvasHolder = new JPanel();
             canvasHolder.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, UIColor.SHADOW));
             canvasHolder.setLayout(new BorderLayout());
-            canvasHolder.add(viewport, BorderLayout.CENTER);
 
             add(topToolbar, BorderLayout.NORTH);
             add(canvasHolder, BorderLayout.CENTER);
 
-            loop = new RenderLoop(JOptionPane.getRootFrame(), viewport) {
-                private long renderTime;
-                private long updateTime;
-                private long framesPassed;
+            if (SystemInfo.isMacOS) {
+                // The macOS heavyweight NSOpenGLView draws over and doesn't clip to lightweight Swing
+                // siblings, so it bleeds across split views. Render to an offscreen FBO and display it
+                // in a lightweight component instead. The (non-displayed) viewport still holds all view
+                // state (camera, flags, outline, model) so menus and renderers keep working unchanged.
+                surface = new OffscreenModelSurface(viewport, statusLabel::setText);
+                surface.setPreferredSize(new Dimension(400, 400));
+                surface.setMinimumSize(new Dimension(100, 100));
+                canvasHolder.add(surface, BorderLayout.CENTER);
+            } else {
+                canvasHolder.add(viewport, BorderLayout.CENTER);
 
-                @Override
-                public void beforeRender() {
-                    renderTime = System.currentTimeMillis();
-                }
+                loop = new RenderLoop(JOptionPane.getRootFrame(), viewport) {
+                    private long renderTime;
+                    private long updateTime;
+                    private long framesPassed;
 
-                @Override
-                public void afterRender() {
-                    framesPassed += 1;
-
-                    if (renderTime - updateTime >= 1000) {
-                        statusLabel.setText("%.3f ms/frame, %d fps".formatted(1000.0 / framesPassed, framesPassed));
-                        updateTime = renderTime;
-                        framesPassed = 0;
+                    @Override
+                    public void beforeRender() {
+                        renderTime = System.currentTimeMillis();
                     }
-                }
-            };
 
-            loop.start();
+                    @Override
+                    public void afterRender() {
+                        framesPassed += 1;
+
+                        if (renderTime - updateTime >= 1000) {
+                            statusLabel.setText("%.3f ms/frame, %d fps".formatted(1000.0 / framesPassed, framesPassed));
+                            updateTime = renderTime;
+                            framesPassed = 0;
+                        }
+                    }
+                };
+
+                loop.start();
+            }
         } else {
             final JLabel placeholder = new JLabel("Preview is not supported");
             placeholder.setHorizontalAlignment(SwingConstants.CENTER);
@@ -122,9 +136,11 @@ public class ModelViewerPanel extends JComponent implements Disposable, Property
     @Override
     public void dispose() {
         Disposable.dispose(loop);
+        Disposable.dispose(surface);
         Disposable.dispose(viewport);
 
         loop = null;
+        surface = null;
         viewport = null;
         controller = null;
     }
