@@ -37,6 +37,18 @@ needs the one-time `build_sfx_workspace.py` run, which requires a wwiser checkou
 `<workspace>/wwiser` (`git clone https://github.com/bnnm/wwiser`). Takes a few minutes;
 run it rather than asking the user to.
 
+**Brand-new machine** (no `config.json` yet)? Four one-time steps, in order — details in
+`audio-extraction-scripts/README.md` → Setup/Dependencies:
+1. Build the app (`./mvnw clean package -DskipTests`).
+2. Get the Oodle dylib (upstream CLI wiki) — without it nothing can read the packfiles.
+3. Open the app once and create the DSDC project pointing at the game data + Oodle
+   (this is the only GUI step; it writes `config.json` with the project id).
+4. Build ww2ogg and revorb (README has the exact commands) and put their paths in the
+   app's Wwise settings.
+After that, everything is scripted. Verified end-to-end 2026-06-10: deleted workspace →
+clone wwiser → `build_sfx_workspace.py` → `find_audio.py "fragile codec ringtone" --take 1`
+reproduced the reference ogg byte-for-byte.
+
 ### Translating user requests to game names (the part that needs judgment)
 
 - Per-character codec/call ringtone: `sd_sfx_com_radio_call_recieve_<char>`
