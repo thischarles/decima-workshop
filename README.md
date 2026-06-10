@@ -1,52 +1,55 @@
-[![Download](https://img.shields.io/github/v/release/ShadelessFox/decima-workshop?label=Download&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KCTxwYXRoIGZpbGw9IndoaXRlIiBkPSJNMTEuMiAwYS44LjggMCAwIDAtLjguOHYxMS40TDcuMjYgOS40NGEuODAzLjgwMyAwIDAgMC0xLjEzLjA3NGwtMS4wNSAxLjJhLjguOCAwIDAgMCAuMDczIDEuMTNsNi4zMyA1LjU0YS43OTUuNzk1IDAgMCAwIDEuMDUgMGw2LjMyLTUuNTRhLjguOCAwIDAgMCAuMDc0LTEuMTNsLTEuMDUtMS4yYS44MDQuODA0IDAgMCAwLTEuMTMtLjA3NGwtMy4xNCAyLjc2Vi44YS44LjggMCAwIDAtLjgtLjh6bS04IDIwLjhhLjguOCAwIDAgMC0uOC44djEuNmEuOC44IDAgMCAwIC44LjhoMTcuNmEuOC44IDAgMCAwIC44LS44di0xLjZhLjguOCAwIDAgMC0uOC0uOHoiPjwvcGF0aD4KPC9zdmc+Cg==)](https://github.com/ShadelessFox/decima-workshop/releases/latest)
-[![Discord](https://img.shields.io/discord/1012475585605414983?label=Chat&logo=discord&logoColor=white)](https://discord.gg/Gt4gkMwadB)
-[![Support](https://img.shields.io/badge/Support-Ko--fi-blue?logo=kofi&logoColor=white)](https://ko-fi.com/shadelessfox)
+# Decima Workshop (for macOS)
+![Static Badge](https://img.shields.io/badge/vibe_coded-gray?style=for-the-badge&logo=claude)
+### Shamelessly vibe coded with Claude.
 
-# Decima Workshop
+![explorer.png](docs/explorer.png)
+This is a fork of [Decima Workshop by ShadelessFox](https://github.com/ShadelessFox/decima-workshop).
 
-Decima Workshop is an open-source modding tool for [games](#supported-games) powered by [Decima engine](https://en.wikipedia.org/wiki/Decima_(game_engine)).
+Death Stranding: Director's Cut is available in the [App Store](https://games.apple.com/us/game/6449748961) for Apple
+devices, and I wanted to see if I could extract the audio files to create ringtones from them. [505 Games has some 
+files available to download](https://deathstrandingpc.505games.com/en/) (bottom of the page), 
+but surprisingly, not the "like" sound effect.
 
-- Browse and edit core objects with complete type information
-- Preview models, textures, shaders, etc
-- Export models, textures, audio, etc
-- Repack archives with your changes
+I initially started with making small modifications to enable the file explorer to open the Death Stranding
+executable and data directory when starting a new project. But then, I found it cumbersome to use the explorer to sift 
+through the graph to hunt down specific resources. That's when I thought to just let Claude take the reins.
 
-![](https://github.com/user-attachments/assets/78c1f23d-9028-4ee4-be26-cc5960787ab3)
+Disclaimer: I haven't thoroughly tested the app, so there likely still are bugs.
 
-### Running
+## What's Different in This Fork
+* Works with the macOS DeathStranding.app executable and data directory
+* Mounts extra packfiles for the macOS port's streamed assets to load
+* 3D model viewer works using offscreen rendering (solution for a bug when showing a model and texture in split view)
+* [Scripts](audio-extraction-scripts/README.md) for extracting audio files (my original goal) based on what I had Claude do to track down
+specific audio files
+  * Dialogue lives under `localized/sentences/` (a virtual path inside the game's packed archives): search the subtitle
+text, and the matching `SentenceResource`'s UUID, byte-reversed, is the filename of its `.wem` audio
+  * Sound effects are events inside Wwise SoundBanks: carve the banks out of the game's archives, and `wwiser`
+resolves an event name to the `.wem` it plays
 
-1. Download the latest release from the [releases page](https://github.com/ShadelessFox/decima-workshop/releases/latest) for your operating system
-2. Unzip the downloaded archive and launch using `decima.exe` on Windows or `bin/decima` on Linux
-3. For further steps, [check out the wiki](https://github.com/ShadelessFox/decima-workshop/wiki/Getting-started)
+## Build and Run
+Requires JDK 24.
 
-#### Nightly builds
+Create .app by running:
+```sh
+./mvnw clean package -DskipTests
+```
+Launch it with:
+```sh
+open decima-app/target/dist/decima.app
+```
 
-If you want to try the latest features and improvements, you can download the latest build from the [actions page](https://github.com/ShadelessFox/decima-workshop/actions).
-Click on the latest workflow run and download the artifact from the `Artifacts` section for your operating system.
+## Tips
 
-### Building
+![newproject.png](docs/newproject.png)
+When starting a New Project, set these fields:
 
-Open your favorite terminal app and execute the following commands in the specified order:
-1. Make sure you have **Java 24** installed. We recommend using [Adoptium](https://adoptium.net/temurin/releases/?arch=x64&version=17&package=jdk)
-2. Make sure you have **Git** installed
-3. Open the terminal and execute the following commands:
-   1. `git clone https://github.com/ShadelessFox/decima-workshop`
-   2. `cd decima`
-   3. `./mvnw clean package`
+Executable file: `/Applications/DeathStranding.app/Contents/MacOS/DeathStranding`
 
-Ready-to-use distributions can be found under the `decima-app/target/dist` directory. To run the application, see [Running](#running).
+Data directory: `/Applications/DeathStranding.app/Contents/Resources/data`
 
-## Supported games
+For oodle, read the [Wiki in the original repo](https://github.com/ShadelessFox/decima-workshop/wiki/CLI#getting-oodle),
+and then point it to wherever you downloaded it to.
 
-| Game                            | Platform |
-|---------------------------------|----------|
-| Death Stranding                 | PC       |
-| Death Stranding: Director's Cut | PC       |
-| Horizon Zero Dawn               | PC       |
-
-## License
-This project is licensed under the GPL-3.0 license.
-
-This project is not sponsored by or related to Guerrilla Games, Kojima Productions, Sony Interactive Entertainment, or others.
-
-Source code and all software made with Decima engine belong to their developers.
+Please refer to the original [README](README-upstream.md) and [Wiki from the original repo](https://github.com/ShadelessFox/decima-workshop/wiki)
+for additional instructions on setting up Decima Workshop.
