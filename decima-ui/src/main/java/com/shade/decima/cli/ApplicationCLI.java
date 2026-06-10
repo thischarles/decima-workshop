@@ -14,7 +14,10 @@ import picocli.CommandLine.Option;
     Localization.class,
     Projects.class,
     RepackArchive.class,
-    GetOodleLibrary.class
+    GetOodleLibrary.class,
+    ExtractFile.class,
+    ExportWem.class,
+    DumpSentences.class
 })
 public class ApplicationCLI {
     @Option(names = {"-h", "--help"}, usageHelp = true, description = "Display this help message")

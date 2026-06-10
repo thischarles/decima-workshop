@@ -73,7 +73,9 @@ public class DumpFilePaths implements Runnable {
                             });
 
                         return result.stream();
-                    } catch (Exception e) {
+                    } catch (Throwable e) {
+                        // Throwable, not Exception: a handful of non-core files OOM the reader
+                        // (an Error), and one bad file shouldn't kill the whole dump.
                         return Stream.empty();
                     } finally {
                         final int current = index.incrementAndGet();
