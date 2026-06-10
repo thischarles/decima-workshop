@@ -32,6 +32,11 @@ ships the `sentences`/`extract`/`export-wem` CLI subcommands they need), and rea
 project id + ww2ogg/revorb paths from
 `~/Library/Application Support/DecimaWorkshop/config.json`.
 
+If the workspace doesn't exist yet: the dialogue index rebuilds itself, but SFX search
+needs the one-time `build_sfx_workspace.py` run, which requires a wwiser checkout at
+`<workspace>/wwiser` (`git clone https://github.com/bnnm/wwiser`). Takes a few minutes;
+run it rather than asking the user to.
+
 ### Translating user requests to game names (the part that needs judgment)
 
 - Per-character codec/call ringtone: `sd_sfx_com_radio_call_recieve_<char>`
