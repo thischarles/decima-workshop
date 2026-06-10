@@ -20,8 +20,10 @@ Disclaimer: I haven't thoroughly tested the app, so there likely still are bugs.
 * Works with the macOS DeathStranding.app executable and data directory
 * Mounts extra packfiles for the macOS port's streamed assets to load
 * 3D model viewer works using offscreen rendering (solution for a bug when showing a model and texture in split view)
-* [Scripts](audio-extraction-scripts/README.md) for extracting audio files (my original goal) based on what I had Claude do to track down
-specific audio files
+* [Scripts](audio-extraction-scripts/README.md) for extracting audio files (my original goal) based on what I had Claude 
+do to track down specific audio files
+  * You can have Claude run the scripts by asking it to extract whatever you're looking for, like "Fragile's codec 
+ringtone" or "mail notification" (see [CLAUDE.md](CLAUDE.md))
   * Dialogue lives under `localized/sentences/` (a virtual path inside the game's packed archives): search the subtitle
 text, and the matching `SentenceResource`'s UUID, byte-reversed, is the filename of its `.wem` audio
   * Sound effects are events inside Wwise SoundBanks: carve the banks out of the game's archives, and `wwiser`
